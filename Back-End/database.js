@@ -22,18 +22,17 @@ let userSchema = new mongoose.Schema({
   password: String,
   age: Number,
   gender: String,
-  measurement:[{ bloodSugar: Number, date: Date, status: String}],
-  medication:[{ medName : String , date: Date , time: Date}],
-  note:[{description: String , date: { type: Date, default: Date.now }
-  }]
+  measurement: [{ bloodsugar: Number, date: Date, status: String }],
+  medication: [{ medname: String, datetime: Date }],
+  note: [{ description: String, date: { type: Date, default: Date.now } }]
 });
 
 let Users = mongoose.model("users", userSchema);
 
 //=========================================GET=================================================//
-let getDate = callBack => {
+let getDate = (callBack, obj) => {
   console.log("GET Data FROM DATABASE");
-  Users.find({}, function(err, docs) {
+  Users.findOne({ _id: obj.id }, function(err, docs) {
     if (err) {
       console.log("ERR:", err);
     }
@@ -76,9 +75,38 @@ let registUser = (cb, obj) => {
     }
   );
 };
+
+let getMedic = (cb, box) => {
+  console.log("boxxxxxx :", box.id);
+  Users.findOne({ _id: box.id }, function(err, docsFind) {
+    if (err) {
+      console.log("ERR:", err);
+    }
+    console.log("docsFindddddddd :", docsFind);
+    let date = Date.parse(box.datetime);
+    // let time = Date.parse(box.time);
+
+    // console.log(typeof date);
+    let y = {
+      medname: box.medname,
+      datetime: date
+    };
+    // delete box.id
+    // console.log("JSON PARSE: ", JSON.stringify(y))
+    docsFind.medication.push(y);
+    docsFind.save(function(err, docsSave) {
+      if (err) {
+        console.log("ERR:", err);
+      }
+      cb(docsSave);
+    });
+  });
+};
+
 //=====================================MODULE EXPORTS=============================================//
 module.exports = {
   getDate,
   registUser,
-  getUser
+  getUser,
+  getMedic
 };

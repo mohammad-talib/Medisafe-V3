@@ -30,7 +30,7 @@ class Login extends Component {
        const { navigate } = this.props.navigation;
         // console.log('loginUser :', loginUser )
         axios
-       .post("http://10.60.95.169:2000/login", this.state)//Orange ip
+       .post("http://192.168.1.97:2000/login", this.state)//Orange ip
        //.post("http://192.168.1.9:2000/login", this.state)//Home ip
 
         .then(async function (response){

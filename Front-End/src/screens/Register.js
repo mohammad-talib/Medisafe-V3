@@ -26,7 +26,7 @@ class Register extends Component {
       var that=this;
       const { navigate } = this.props.navigation;
         axios
-           .post("http://10.60.95.169:2000/registration", this.state)//Orange ip
+           .post("http://192.168.1.97:2000/registration", this.state)//Orange ip
           //.post("http://192.168.1.9:2000/registration", this.state)//Home ip
 
           .then(async function (response) {

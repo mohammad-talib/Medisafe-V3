@@ -21,12 +21,14 @@ app.get("/", (req, res) => {
 });
 
 //=======================================GET DATA===============================================//
-// app.get("/showcase", (req, res) => {
-//   DB.getPlaces(result => {
-//     console.log("CALL BACK FROM SERVER");
-//     res.json(result);
-//   });
-// });
+app.post("/showdata", (req, res) => {
+  let box = req.body;
+  console.log('IDDDDDDDDDD :', box);
+  DB.getDate(result => {
+    console.log("CALL BACK FROM SERVER");
+    res.json(result);
+  }, box);
+});
 
 
 //===================================GET DATA BY ID==============================================//
@@ -51,6 +53,15 @@ app.post("/login", (req, res) => {
     res.json(repo);
   }, object);
 });
+
+app.post("/medication", (req, res) => {
+  let object = req.body;
+  console.log('objectttttttttttttttt :', object);
+  DB.getMedic(repo => {
+    res.json(repo);
+  }, object);
+});
+
 
 // app.post("/addPlace", (req, res) => {
 //   let inputs=req.body;
