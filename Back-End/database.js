@@ -28,6 +28,20 @@ let userSchema = new mongoose.Schema({
 });
 
 let Users = mongoose.model("users", userSchema);
+//=========================================DELETE=================================================//
+
+// let deleteMid = (cb, ID) => {
+//   // console.log("GET Data FROM DATABASE");
+//   console.log('objjjjjjjjjjjjjjj :', ID);
+//   // console.log('obj.idddddd :', obj.id);
+//   // Users.deleteOne({ _id: ID }, function(err, docs) {
+//   //   if (err) {
+//   //     console.log("ERR:", err);
+//   //   }
+//   //   console.log("DOCS:", docs);
+//   //   cb(docs);
+//   // });
+// };
 
 //=========================================GET=================================================//
 let getDate = (callBack, obj) => {
@@ -108,5 +122,6 @@ module.exports = {
   getDate,
   registUser,
   getUser,
-  getMedic
+  getMedic,
+  // deleteMid
 };

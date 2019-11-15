@@ -22,7 +22,7 @@ class HamburgerMenu extends Component {
                 <Text>{email}</Text>
                 <Text>{age}</Text>
                 <Text>{gender}</Text>
-                <Button title="Dates Medication" onPress={()=>this.props.navigation.navigate('Dates',_id,username) }/>
+                <Button title="Dates Medication" onPress={()=>this.props.navigation.navigate('Dates',_id) }/>
                 <Button title="Measurment" onPress={()=>this.props.navigation.navigate('Measurment',_id) }/>
                 <Button title="Notes" onPress={()=>this.props.navigation.navigate('Notes',_id) }/>
             </View>

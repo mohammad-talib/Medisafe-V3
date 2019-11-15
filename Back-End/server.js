@@ -33,8 +33,9 @@ app.post("/showdata", (req, res) => {
 
 //===================================GET DATA BY ID==============================================//
 
-// app.get("/place/:ID", (req, res) => {
-//   DB.placeById(result => res.json(result), req.params.ID);
+// app.delete("/delete/:id", (req, res) => {
+//   DB.deleteMid(result => res.json(result), req.params.id);
+//   // console.log('req.params.iddddddd :', req.params.id);
 // });
 
 //=======================================ADD DATA===============================================//

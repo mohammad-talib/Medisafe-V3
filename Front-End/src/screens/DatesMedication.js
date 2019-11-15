@@ -5,8 +5,10 @@ import {
   StyleSheet,
   TextInput,
   Button,
+  Image,
   SafeAreaView,
   FlatList,
+  ScrollView,
   TouchableOpacity
 } from "react-native";
 
@@ -41,6 +43,7 @@ export default class DatesMedication extends Component {
     // console.log('medicccccccccccccccccccccccccccccccccc :', medic);
   };
 
+
   showDateTimePicker = () => {
     this.setState({ isDateTimePickerVisible: true });
   };
@@ -49,7 +52,6 @@ export default class DatesMedication extends Component {
     this.setState({ isDateTimePickerVisible: false });
   };
   //WARNING! To be deprecated in React v17. Use componentDidMount instead.
-
 
   handelSubmit = () => {
     //192.168.1.97 home
@@ -69,84 +71,62 @@ export default class DatesMedication extends Component {
   };
 
   render() {
-    console.log("Stateeeeeeeeeeeeeeeeeeeeeee :", this.state);
+  
     return (
-      <View style={styles.screen}>
-        <Text>Dates Medication screen </Text>
-        <Text>{this.state.id}</Text>
-        <Text>{this.props.navigation.state.params}</Text>
-        <View>
-          <TextInput onChangeText={medname => this.setState({ medname })} />
+      <View style={styles.container}>
 
-          <Button title="Show DatePicker" onPress={this.showDateTimePicker} />
-          <DateTimePicker
-            isVisible={this.state.isDateTimePickerVisible}
-            onConfirm={datetime => {
-              this.setState({ datetime });
-            }}
-            onCancel={this.hideDateTimePicker}
-            mode={"datetime"}
-            is24Hour={true}
+        <View style={styles.imageIcon}>
+          <Image
+            style={{ width: 150, height: 150 }}
+            source={require("../../assets/drug-capsule-pill.png")}
+          />
+        </View>
+        <View style={styles.inputButton}>
+          <TextInput
+            style={styles.inputBox}
+            placeholder="medic"
+            onChangeText={medname => this.setState({ medname })}
           />
 
-          {/* <DatePicker
-            style={{ width: 200 }}
-            date={this.state.date}
-            mode="date"
-            placeholder="select date"
-            format="YYYY-MM-DD"
-            minDate="2019-11-12"
-            maxDate="2022-01-01"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-            customStyles={{
-              dateIcon: {
-                position: "absolute",
-                left: 0,
-                top: 4,
-                marginLeft: 0
-              },
-              dateInput: {
-                marginLeft: 36
-              }
-              
-            }}
-            onDateChange={date => {
-              this.setState({ date });
-            }}
-          /> */}
-          {/* <View style={styles.container}>
-            <TouchableOpacity
-              onPress={() => this.TimePicker.open()}
-              style={styles.button}
-            >
-              <Text style={styles.buttonText}>SET Time</Text>
-            </TouchableOpacity>
-            <Text style={styles.text}>{this.state.time}</Text>
-            <TimePicker
-              ref={ref => {
-                this.TimePicker = ref;
-              }}
-              onCancel={() => this.onCancel()}
-              onConfirm={(hour, minute) => this.onConfirm(hour, minute)}
+          <TouchableOpacity onPress={this.showDateTimePicker}>
+            <Image
+              style={{ width: 50, height: 50 }}
+              source={require("../../assets/datetime.png")}
             />
-          </View> */}
+
+            <DateTimePicker
+              isVisible={this.state.isDateTimePickerVisible}
+              onConfirm={datetime => {
+                this.setState({ datetime });
+              }}
+              onCancel={this.hideDateTimePicker}
+              mode={"datetime"}
+              is24Hour={true}
+            />
+          </TouchableOpacity>
         </View>
-        <Button title="state" onPress={this.handelSubmit} />
-        <View>
+        <View style={{ alignItems: "center" }}>
+
           <FlatList
             data={this.state.medic}
             renderItem={({ item }) => {
               console.log("item :", item);
               return (
-                <Text>
-                  {item.medname}
-                  {item.datetime}
-                </Text>
+
+                <ScrollView>
+                  <View style={styles.card}>
+                    <Text>Name of Medic: {item.medname}</Text>
+                    <Text style={styles.dateCard}>Date: {item.datetime}</Text>
+                  </View>
+                </ScrollView>
               );
             }}
             keyExtractor={item => item._id}
           />
+        </View>
+
+        <View style={styles.buttonAdd}>
+          <Button title="ADD MEDIC" onPress={this.handelSubmit} />
         </View>
       </View>
     );
@@ -154,5 +134,52 @@ export default class DatesMedication extends Component {
 }
 
 const styles = StyleSheet.create({
-  screen: {}
+  container: {
+    backgroundColor: "#e5e5e5",
+    height: "100%"
+
+    // justifyContent : 'center'
+  },
+  imageIcon: {
+    alignItems: "center"
+  },
+  inputBox: {
+    width: 300,
+    backgroundColor: "rgb(255, 255, 255)",
+    borderRadius: 25,
+    paddingHorizontal: 16,
+    fontSize: 16,
+    color: "#000000",
+    marginVertical: 10
+  },
+  inputButton: {
+    flexDirection: "row",
+    justifyContent: "space-around"
+  },
+  card: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    // alignItems: "center",
+    marginVertical: 10,
+    borderRadius: 10,
+    backgroundColor: "rgb(255, 255, 255)",
+    width: 350,
+    height: 60,
+    padding: 10
+  },
+  dateCard: {
+    position: "absolute",
+    bottom: 5,
+    right: 5,
+    fontSize: 10,
+    color: "#565656"
+  },
+  buttonAdd: {
+    position: "absolute",
+    bottom: 0,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    width: "100%",
+    flex: 1
+  }
 });

@@ -12,7 +12,7 @@ import RegisterScreen from '../screens/Register';
 var t =1
 const navigator = createStackNavigator(
 {
-
+    
     StartingPage:StartingPageScreen,
     Login: LoginScreen,
     Dates: DatesMedicationScreen,
